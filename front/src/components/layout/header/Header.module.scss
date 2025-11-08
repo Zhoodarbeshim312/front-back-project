@@ -5,7 +5,7 @@
   position: sticky;
   top: 0;
   z-index: 99;
-  background-color: #111827;
+  background-color: #1f2937;
 
   .content {
     display: flex;
@@ -16,12 +16,12 @@
       cursor: pointer;
       font-size: 26px;
       font-weight: 700;
-      color: #facc15;
+      color: #a855f7;
       letter-spacing: 1px;
       transition: 0.3s;
 
       &:hover {
-        color: #fde68a;
+        color: #c084fc;
       }
     }
 
@@ -31,40 +31,39 @@
       gap: 20px;
 
       a {
-        color: #e5e7eb;
+        color: white;
         text-decoration: none;
         font-weight: 500;
         transition: 0.3s;
 
         &:hover {
-          color: #facc15;
+          color: #a855f7;
         }
       }
 
       button {
-        background-color: transparent;
-        border: 1px solid #facc15;
-        color: #facc15;
-        padding: 6px 12px;
+        background: #9333ea;
+        border: none;
         border-radius: 6px;
+        padding: 10px 20px;
+        color: white;
         cursor: pointer;
-        font-weight: 500;
+        font-weight: 600;
         transition: 0.3s;
 
         &:hover {
-          background-color: #facc15;
-          color: #111827;
+          background: #a855f7;
         }
       }
 
-      @media (max-width: 755px) {
+      @media (max-width: 800px) {
         display: none;
       }
     }
 
     .burger {
       display: none;
-      @media (max-width: 755px) {
+      @media (max-width: 800px) {
         display: flex;
       }
     }
@@ -76,7 +75,7 @@
     right: -250px;
     width: 250px;
     height: 100vh;
-    background-color: #111827;
+    background-color: #1f2937;
     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
@@ -94,30 +93,29 @@
       flex-direction: column;
       gap: 15px;
 
-      a,
-      button {
-        font-size: 18px;
-        color: #e5e7eb;
+      a {
+        color: white;
         text-decoration: none;
-        border: none;
-        background: none;
-        cursor: pointer;
         font-weight: 500;
         transition: 0.3s;
 
         &:hover {
-          color: #facc15;
+          color: #a855f7;
         }
       }
 
       button {
-        border: 1px solid #facc15;
-        padding: 6px 12px;
+        background: #9333ea;
+        border: none;
         border-radius: 6px;
+        padding: 10px 20px;
+        color: white;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.3s;
 
         &:hover {
-          background-color: #facc15;
-          color: #111827;
+          background: #a855f7;
         }
       }
     }
@@ -131,5 +129,106 @@
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 50;
+  }
+
+  .modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(17, 24, 39, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .modal {
+    background: #1f2937;
+    color: #a855f7;
+    border-radius: 12px;
+    padding: 30px 40px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+    position: relative;
+    width: 320px;
+    animation: scaleUp 0.3s ease;
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #a855f7;
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      input {
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #4b5563;
+        background: #374151;
+        color: white;
+        outline: none;
+        transition: 0.2s;
+
+        &:focus {
+          border-color: #a855f7;
+        }
+      }
+
+      button {
+        background: #9333ea;
+        border: none;
+        border-radius: 6px;
+        padding: 10px;
+        color: white;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.3s;
+
+        &:hover {
+          background: #a855f7;
+        }
+      }
+    }
+  }
+
+  .closeBtn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: #a855f7;
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover {
+      color: #c084fc;
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes scaleUp {
+    from {
+      transform: scale(0.9);
+      opacity: 0.7;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
   }
 }
