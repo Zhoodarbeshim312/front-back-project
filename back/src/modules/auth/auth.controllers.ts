@@ -45,6 +45,40 @@ const register = async (req: Request, res: Response) => {
     });
   }
 };
+const login = async (req: Request, res: Response) => {
+  try {
+    const { username, password } = req.body;
+    const user: IUser | null = await prisma.user.findUnique({
+      where: { username },
+    });
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "Пользователь не найден!",
+      });
+    }
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+    if (!isPasswordCorrect) {
+      return res.status(401).json({
+        success: false,
+        message: "Неверный пароль!",
+      });
+    }
+    const token = generateToken(user.id);
+    res.status(200).json({
+      success: true,
+      token,
+      user,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: `Error in login: ${error}`,
+    });
+  }
+};
+
 export default {
   register,
+  login,
 };
