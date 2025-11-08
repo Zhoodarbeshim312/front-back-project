@@ -17,7 +17,7 @@ const Header = () => {
       return;
     }
     try {
-      await axios.post("http://localhost:5000/app/v1/auth/register", {
+      await axios.post("http://localhost:5000/api/v1/auth/register", {
         username: userName,
         password: password,
       });
@@ -30,6 +30,30 @@ const Header = () => {
       alert("Ошибка при регистрации");
     }
   };
+  const handleLogin = async () => {
+    if (!userName.trim() || !password.trim()) {
+      alert("Заполните пустые ячейки!");
+      return;
+    }
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/auth/login",
+        {
+          username: userName,
+          password: password,
+        }
+      );
+      const { token, user } = response.data;
+      localStorage.setItem("token", token);
+      setUserName("");
+      setPassword("");
+      alert("Вход выполнен успешно!");
+    } catch (error: any) {
+      console.error(error);
+      alert(error.response?.data?.message || "Ошибка при входе");
+    }
+  };
+
   return (
     <header className={scss.Header}>
       <div className="container">
@@ -127,9 +151,19 @@ const Header = () => {
           <div className={scss.modal} onClick={(e) => e.stopPropagation()}>
             <h2>Login</h2>
             <div className={scss.form}>
-              <input type="text" placeholder="Username" />
-              <input type="password" placeholder="Password" />
-              <button>Login</button>
+              <input
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+                type="text"
+                placeholder="Username"
+              />
+              <input
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                type="password"
+                placeholder="Password"
+              />
+              <button onClick={handleLogin}>Login</button>
             </div>
             <button
               className={scss.closeBtn}
