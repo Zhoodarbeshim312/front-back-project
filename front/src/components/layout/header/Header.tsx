@@ -3,12 +3,33 @@ import Link from "next/link";
 import scss from "./Header.module.scss";
 import { Spin as Hamburger } from "hamburger-react";
 import { useState } from "react";
+import axios from "axios";
 
 const Header = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
   const [isLoginOpen, setLoginOpen] = useState(false);
   const [isRegisterOpen, setRegisterOpen] = useState(false);
-
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const handleRegister = async () => {
+    if (!userName.trim() || !password.trim()) {
+      alert("Заполните пустые ячейки!");
+      return;
+    }
+    try {
+      await axios.post("http://localhost:5000/app/v1/auth/register", {
+        username: userName,
+        password: password,
+      });
+      setUserName("");
+      setPassword("");
+      alert("Регистрация прошла успешно!");
+    } catch (error) {
+      console.error(error);
+      console.log(error);
+      alert("Ошибка при регистрации");
+    }
+  };
   return (
     <header className={scss.Header}>
       <div className="container">
@@ -77,9 +98,19 @@ const Header = () => {
           <div className={scss.modal} onClick={(e) => e.stopPropagation()}>
             <h2>Registration</h2>
             <div className={scss.form}>
-              <input type="text" placeholder="Username" />
-              <input type="password" placeholder="Password" />
-              <button>Register</button>
+              <input
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+                type="text"
+                placeholder="Username"
+              />
+              <input
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                type="password"
+                placeholder="Password"
+              />
+              <button onClick={handleRegister}>Register</button>
             </div>
             <button
               className={scss.closeBtn}
