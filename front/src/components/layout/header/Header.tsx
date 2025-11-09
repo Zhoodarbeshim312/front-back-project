@@ -4,6 +4,7 @@ import scss from "./Header.module.scss";
 import { Spin as Hamburger } from "hamburger-react";
 import { useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -11,6 +12,7 @@ const Header = () => {
   const [isRegisterOpen, setRegisterOpen] = useState(false);
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const nav = useRouter();
   const handleRegister = async () => {
     if (!userName.trim() || !password.trim()) {
       alert("Заполните пустые ячейки!");
@@ -43,7 +45,7 @@ const Header = () => {
           password: password,
         }
       );
-      const { token, user } = response.data;
+      const { token } = response.data;
       localStorage.setItem("token", token);
       setUserName("");
       setPassword("");
@@ -65,7 +67,7 @@ const Header = () => {
             <Link href={"/products"}>Products</Link>
             <Link href={"/favorites"}>Favorites</Link>
             <Link href={"/basket"}>Basket</Link>
-            <button>Admin</button>
+            <button onClick={() => nav.push("/admin")}>Admin</button>
             <button onClick={() => setRegisterOpen(true)}>Registration</button>
             <button onClick={() => setLoginOpen(true)}>Login</button>
           </nav>
