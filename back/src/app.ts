@@ -1,6 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import globalRouter from "./routes/routes";
+import { swaggerDocs } from "./config/swagger";
 const buildServer = () => {
   const server = express();
   server.use(express.json());
@@ -11,6 +12,7 @@ const buildServer = () => {
     });
   });
   server.use("/api/v1", globalRouter);
+  swaggerDocs(server);
   return server;
 };
 export default buildServer;
