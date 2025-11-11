@@ -23,7 +23,7 @@ const Products = () => {
   const getData = async () => {
     try {
       let res = await axios.get<Root>(
-        "http://localhost:5000/api/v1/product/getProduct"
+        "http://localhost:5000/api/products/getProduct"
       );
       setData(res.data.product);
     } catch (error) {

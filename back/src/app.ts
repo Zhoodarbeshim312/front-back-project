@@ -11,7 +11,7 @@ const buildServer = () => {
       message: "Server run",
     });
   });
-  server.use("/api/v1", globalRouter);
+  server.use("/api/", globalRouter);
   swaggerDocs(server);
   return server;
 };

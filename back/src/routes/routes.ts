@@ -9,6 +9,6 @@ const corsConfig = {
   origin: ["http://localhost:3000", "http://192.168.0.106:3000"],
 };
 globalRouter.use("/auth", cors(corsConfig), authRoutes);
-globalRouter.use("/product", cors(corsConfig), productRoutes);
-globalRouter.use("/user", cors(corsConfig), userRoutes);
+globalRouter.use("/products", cors(corsConfig), productRoutes);
+globalRouter.use("/users", cors(corsConfig), userRoutes);
 export default globalRouter;
