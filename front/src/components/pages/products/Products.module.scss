@@ -3,9 +3,11 @@
   color: #f9fafb;
 
   .content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    display: flex;
+    align-items: center;
     gap: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
   .card {
@@ -28,7 +30,7 @@
     img {
       width: 100%;
       height: 200px;
-      object-fit: cover;
+      object-fit: contain;
       border-radius: 12px;
       margin-bottom: 15px;
     }
