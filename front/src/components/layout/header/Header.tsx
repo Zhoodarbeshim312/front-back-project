@@ -19,7 +19,7 @@ const Header = () => {
       return;
     }
     try {
-      await axios.post("http://localhost:5000/api/v1/auth/register", {
+      await axios.post("http://localhost:5000/api/auth/register", {
         username: userName,
         password: password,
       });
@@ -39,7 +39,7 @@ const Header = () => {
     }
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/v1/auth/login",
+        "http://localhost:5000/api/auth/login",
         {
           username: userName,
           password: password,
